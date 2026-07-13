@@ -1,0 +1,59 @@
+# --- generated media & bulk outputs (kept on disk, not in git) ---
+outputs/
+**/outputs/
+**/anchors/
+**/frames/
+**/frames2*/
+**/frames_end/
+**/frames_prev/
+**/music/
+**/ambience/
+**/dub/
+**/vo/
+**/vo2/
+**/vo_*/
+**/animatic*/
+**/auditions/
+**/blind_pairs*/
+**/storyboard_thumbs/
+**/qc/
+**/cards/
+**/books/
+**/notes/
+**/source/
+**/sheets/
+
+# media files anywhere
+*.mp4
+*.mov
+*.gif
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.m4a
+*.mp3
+*.wav
+*.pdf
+*.tar.gz
+
+# generated html is rebuildable
+storyboard*.html
+auditions.html
+casting.html
+
+# logs / caches / local state
+*.log
+*.err
+__pycache__/
+.seedance_slots/
+.DS_Store
+elevenlabs_voices.json
+overlay_offsets.json
+
+# local env / session state
+.venv*/
+.claude/
+.playwright-mcp/
+node_modules/
+.whisper/
