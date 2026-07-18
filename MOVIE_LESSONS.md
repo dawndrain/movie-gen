@@ -205,6 +205,6 @@ The npm CLI is the only path to Seedance 2.0 and Nano Banana Pro. API keys
 live at `~/.elevenlabs_key`, `~/.gemini_key`, and `~/.fal_key`. Shared tools
 sit at the repo root (gen.py, pool_run.py, dub_clip.py, pitch_check.py,
 listen.py); each film is its own subfolder, and `long_game/` is the template
-worth copying. The repo (github.com/dawndrain/MovieGen, private) excludes
+worth copying. The repo (github.com/dawndrain/movie-gen, private) excludes
 media and any project adapting a copyrighted source — add such projects to
 .gitignore BEFORE committing. Everything else is in MOVIE_LESSONS_FULL.md.
