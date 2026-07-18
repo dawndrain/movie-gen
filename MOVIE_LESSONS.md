@@ -41,9 +41,9 @@ its anchors, and its voice references. Use **fast mode at 720p and below** — a
 20-pair blind test settled this (Dawn picked fast in 13 of 18 decisive pairs,
 including close-up faces, where the worst identity glitches were actually std
 takes; the earlier "fast is unusable" verdict traced back to bad prompting,
-not the mode). Since per-take seed luck matters more than mode, the smart use
-of std's double price is two fast rolls of the same shot, keeping the better
-one. Std is still required for shots with multiple `--audio` references and
+not the mode). One roll per shot by default — per-take seed luck matters more
+than mode, so re-roll individual shots that fail QC rather than paying double
+up front. Std is still required for shots with multiple `--audio` references and
 for output above 720p. Either mode takes about three to five minutes per clip;
 if clips are taking half an hour, you're not slow, you're contended — another
 project is eating the workspace's eight-job cap.
