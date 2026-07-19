@@ -157,7 +157,11 @@ high-frequency whine), crossfade-stitch to five minutes, and normalize.
 
 The mixing rule that prevents every "the music is overpowering" round: set all
 levels in LUFS, never in mean volume — spiky sounds like crickets read quiet on
-an amplitude meter but loud to the ear. Normalize every stem to a common
+an amplitude meter but loud to the ear. One guard on the normalizer: if a bed
+needs more than ~12dB of gain to reach target, it isn't quiet, it's a failed
+generation (ElevenLabs sometimes returns near-silence), and boosting it just
+amplifies the noise floor into a mechanical drone — regenerate or drop it. A
+`-inf` loudness measurement is that failure announcing itself. Normalize every stem to a common
 -30 LUFS, measure the film's dialogue loudness once with ebur128, and then
 every bed and cue is a simple dB offset below that anchor (ambience sits 12–16
 dB under). And since none of us here have ears, `listen.py` sends any audio to

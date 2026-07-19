@@ -10,6 +10,10 @@
 > audition voice "flawless/10/10" including an inaudible one. Use listen.py only
 > with adversarial find-the-fault prompts or A/B comparisons; audibility/level
 > questions are ebur128 measurements, not listening questions.
+> Postscript: the "library bed whine" was actually the loudnorm boosting a
+> near-silent (-69 LUFS) generation's NOISE FLOOR by 39dB — the source bed is
+> inaudible and the normalized file is a mechanical drone. Guard: >12dB of
+> required gain = failed generation; regenerate or drop, never boost.
 
 > Addendum (2026-07-12, "The Vaulted Sky" v2 convergence — the complete
 > input-filter model, ~9 rounds of evidence):
