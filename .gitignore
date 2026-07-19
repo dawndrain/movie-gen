@@ -59,9 +59,14 @@ node_modules/
 .whisper/
 
 # adaptations of copyrighted works — kept local, never committed
-mewtwo/
-animorphs/
-animorphs_david/
-carl/
-walters_deal/
-homo_sapien/
+other_movies/mewtwo/
+other_movies/animorphs/
+other_movies/animorphs_david/
+other_movies/carl/
+# walters_deal + homo_sapien scripts are committed; the copyrighted source
+# text and song lyrics are not:
+other_movies/walters_deal/story.txt
+other_movies/homo_sapien/lyrics_timed.md
+other_movies/homo_sapien/STORYBOARD.md
+other_movies/homo_sapien/storyboard_gen.py
+other_movies/homo_sapien/animatic.py

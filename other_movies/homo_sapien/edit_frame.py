@@ -1,7 +1,4 @@
 #!/usr/bin/env python3
-# TEMPLATE — copied from other_movies/homo_sapien/edit_frame.py (targeted single-change frame edits (beats re-rolls)).
-# Project-specific: expects that film's spec/paths. Copy into a new film
-# folder and adapt; the original in other_movies/homo_sapien/ is the working example.
 """TARGETED EDIT of an existing frame — change one thing, keep everything else.
 
     python3 edit_frame.py s08_side_by_side "the teal mongoose is now a teal FOX"

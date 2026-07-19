@@ -1,7 +1,4 @@
 #!/usr/bin/env python3
-# TEMPLATE — copied from other_movies/homo_sapien/make_batch.py (emit pool_run batch .sh from the clip spec (no drift)).
-# Project-specific: expects that film's spec/paths. Copy into a new film
-# folder and adapt; the original in other_movies/homo_sapien/ is the working example.
 """Emit a pool_run batch script straight from clips_spec.py.
 
     python3 make_batch.py videos_v1.sh s01 s10     # a shot range, inclusive

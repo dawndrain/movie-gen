@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-# TEMPLATE — copied from mewtwo/dub_pass.py (batch re-voice rendered clips via demucs + ElevenLabs STS).
+# TEMPLATE — copied from other_movies/mewtwo/dub_pass.py (batch re-voice rendered clips via demucs + ElevenLabs STS).
 # Project-specific: expects that film's spec/paths. Copy into a new film
-# folder and adapt; the original in mewtwo/ is the working example.
+# folder and adapt; the original in other_movies/mewtwo/ is the working example.
 """Re-voice every rendered dialogue clip to the locked ElevenLabs cast without
 re-rendering video (lip sync survives — timing is preserved).
 

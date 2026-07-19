@@ -135,7 +135,8 @@ def main() -> None:
     video.add_argument("--duration", type=int, default=5)
     video.add_argument("--aspect_ratio", default="16:9")
     video.add_argument("--std", action="store_true",
-                       help="use std mode even at 480p/720p (default: fast)")
+                       help="std mode: required for multiple --audio refs or >720p "
+                            "(default fast — cheaper and blind-tested better)")
     video.add_argument("--start-image")
     video.add_argument("--end-image")
     video.add_argument("--image", action="append", help="image reference (up to 9)")

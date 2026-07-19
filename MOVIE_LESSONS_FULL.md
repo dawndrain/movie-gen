@@ -4,6 +4,8 @@
 > version. This file keeps the complete detail: per-project addenda (add
 > new ones here, at the top, as before), API recipes, and war stories.
 > When an addendum lesson generalizes, promote a one-liner into the short doc.
+> (2026-07-18: film folders other than long_game/ moved under other_movies/ —
+> addenda paths like carl/... now mean other_movies/carl/...)
 
 > Addendum (2026-07-12, "The Vaulted Sky" v2 convergence — the complete
 > input-filter model, ~9 rounds of evidence):
@@ -61,6 +63,39 @@
 >   mixed with a carnival barker" — instant confidence) and the final mix
 >   (confirmed the LUFS-offset scheme: anchor -20.4, music -12 dB, amb -14 dB
 >   under; no per-cue hand-tuning needed for a v1).
+> - (added 07-18) **LUFS-check every TTS take, not just voice samples** — one
+>   catalog voice (Merv) renders ~-37 LUFS, ~21 dB under the pack, and two
+>   near-silent Maggie lines shipped in v1. THREE QC layers missed it: Gemini
+>   "dialogue always intelligible" full-mix pass (can't miss what it doesn't
+>   know should be there), pitch stats (F0 fine on a quiet file), and the
+>   skipped whisper-vs-script diff ("TTS is the script by construction" — but
+>   not if the take is inaudible). Director's ear caught it in one listen.
+>   tts_phase now flags takes under -30 LUFS.
+> - (added 07-18) Gemini is a DEFECT detector, not a taste judge: on "rate
+>   the fit" it scored 6/6 designed leads "10/10 / flawless"; asked to QC the
+>   broken Merv take blind it did reject it (noise floor, mouth clicks) but
+>   never noticed the actual defect — the level. Ask it for problems, not
+>   ratings, and keep the meters in the loop.
+> - (added 07-18) **The inverse failure mode is just as real**: told "report
+>   problems with timestamps; do NOT compliment", Gemini produced 8
+>   confident timestamped defects for the v2 mix — and all 3 objectively
+>   checkable ones were FALSE (claimed clipping: peaks -4.3 dBFS, 0 clipped
+>   samples; claimed digital click: normal transients; claimed audio ending
+>   500ms early: audio outlives video, intentional fade). It satisfies the
+>   instruction, not the audio — in BOTH directions. Meter-verify every
+>   concrete Gemini claim before spending a fix on it; treat its taste
+>   notes as hypotheses for the director's ears only.
+> - (added 07-18) **median-F0 measures the note, not the "depth"**: bellowing
+>   characters (Maestro, the Juicer) legitimately read 225-245 Hz — shouting
+>   raises the fundamental — while calm deep briefs sat 100-130 Hz. Perceived
+>   depth is timbre/formants, invisible to F0. Don't pitch-screen shouty
+>   registers against conversational thresholds.
+> - (added 07-18) ElevenLabs Voice DESIGN (text-to-voice/create-previews, 3
+>   previews per written casting brief, ~65 chars billed per 1k-char call) is
+>   a real casting pool beyond premades/library — 51 bespoke candidates for
+>   ~3.3k chars, and the briefs double as director-readable casting notes.
+>   generated_voice_ids persist in designed_voices.json; `adopt` saves the
+>   pick + updates cast_overrides.json + clears stale vo lines in one step.
 >
 > Addendum (2026-07-11, veo3 std-vs-fast BLIND test, ~/Code/videogen/veo3_compare):
 > - **ROUND 2 (10 more pairs, face/dialogue-heavy prompts): fast won 7-1 with 2
@@ -215,7 +250,9 @@
 >   rewordings of a targeted edit all bounced — the ref image contained a child's
 >   hand, and no phrasing was going to fix that. When rewording fails and you are
 >   passing an `--image`, suspect the image and regenerate fresh instead.
-> - **TARGETED EDITS beat re-rolls — `edit_frame.py`.** Pass the existing frame as
+> - **TARGETED EDITS beat re-rolls — `edit_frame.py`.** [Director's later
+>   verdict: this never actually worked as intended in practice — treat the
+>   claims below as unreproduced.] Pass the existing frame as
 >   an `--image` ref with "reproduce the reference EXACTLY... change ONLY <x>" and
 >   Nano Banana changes just that one thing. A re-roll re-rolls EVERYTHING (faces,
 >   staging, light), so fixing one animal can cost you the whole shot — this is the
@@ -506,10 +543,12 @@ generation becomes the LAST step per shot, not the first.
 
 ## Quality settings & the draft/master workflow
 
-- **DO NOT USE FAST MODE — always `--std`.** Director's verdict (2026-07, "The
-  Vaulted Sky"): fast is "pretty bad/unusable". The Long Game's earlier A/B that
-  called fast "almost as good" does not hold up; render every pass, including
-  first drafts, at 480p std.
+- **Use FAST mode at ≤720p** (verdict reversed 2026-07-11 by a 20-pair blind
+  A/B in veo3_compare: the director picked fast in 13/18 decisive pairs,
+  including close-up-face prompts, and retracted the earlier "fast is unusable"
+  call as a bad-prompting artifact). One roll per shot by default; re-roll
+  shots that fail QC rather than paying double up front. Std remains required
+  for multi-`--audio` dialogue shots and >720p output.
 - **std is NOT slow — it is ~3–5 minutes per clip.** MEASURED (2026-07-11, Homo
   Sapien, 11 clips, 7 workers, uncontended workspace): the first wave of 7 all
   landed **3m18s–5m31s** after launch, and clip LENGTH barely mattered (a 10s clip
@@ -518,7 +557,7 @@ generation becomes the LAST step per shot, not the first.
   The old "30–45 min/clip" figure in this doc was wrong: it was measured while
   sibling projects were eating the 8-job workspace cap, so QUEUE WAIT was being
   recorded as generation time. That error is dangerous — it makes std look
-  expensive enough to tempt you into fast mode, which is unusable. If clips are
+  expensive when you do need it (multi-audio shots, >720p). If clips are
   taking 30+ min, you are not slow, you are CONTENDED: check for other sessions.
 - The locks still matter more than anything: with weak prompts even std looks bad.
 
@@ -587,35 +626,30 @@ Other prompt lessons:
 
 ## Voice casting / auditions (ElevenLabs)
 
-- Build an **audition page** (`mewtwo/el_auditions.py` → `auditions.html`) and
-  let the director cast from it: one section per character with **the
-  character's anchor portrait displayed next to the audio players** (sticky,
-  so the face stays on screen while scrolling the candidates) — hearing a
-  voice while looking at the face is what makes the fit obvious. Each section
-  gets ONE signature line in that character's actual register, then every
-  candidate voice reads the same line, labeled `Voice (variant)`.
-- Candidate sourcing, two tiers: the ~20 account **premades**
-  (`GET /v1/voices`) cover generic humans; the characterful ones come from the
-  **community library** — `GET /v1/shared-voices` with searches like "italian
-  accent deep male" / structured filters (`use_cases=characters_animation&`
-  `descriptives=deep`), then `POST /v1/voices/add/{owner_id}/{voice_id}` makes
-  them permanently usable. Freetext search is finicky; structured filters and
-  single words ("god") surface more. Use FULL ids — truncating owner ids in
-  notes causes 404s later.
-- Cut each candidate at 2–3 **voice_settings variants**: calm
-  (stability .75 / style .05 — telepathic/measured register), base
-  (.50/.25), drama (.35/.55). The same voice can pass at one setting and fail
-  at another.
+- **Prompt for custom voices; don't browse the catalog.** The premades and the
+  searchable community library are mostly podcaster-generic, and the
+  "characterful" ones veer cartoonish (a candidate cast as a stoic frontiersman
+  came out a pirate). ElevenLabs voice design — describe the voice in a prompt,
+  generate candidate voices, keep the winners — produces distinctive,
+  cast-able voices and is now the default workflow. (This postdates The Long
+  Game, which was cast from catalog voices + clones of approved takes.)
+- Build an **audition page** (see `tools/templates/make_auditions.py`) and let
+  the director cast from it: one section per character with the character's
+  anchor portrait displayed next to the audio players — hearing a voice while
+  looking at the face is what makes the fit obvious. Every candidate reads the
+  same signature line in that character's actual register.
+- **One "base" read per candidate is enough.** Calm/drama voice_settings
+  variants tripled the audio without ever changing a casting decision.
 - Write the audition line NATURALLY. A scripted ellipsis ("Two plus two...
   is four") gets heard as the VOICE hesitating and costs a good candidate the
   part.
 - Pre-screen with pitch stats (`pitch.py`) to catch miscasts before the
-  director listens, but expect surprises: the director cast the
-  "High-Pitched Villain" (147 Hz) for a ten-year-old Mewtwo over every
-  deep "voice of god" candidate — fictional-age logic beats timbre logic.
-- Iterate rounds: when round 1 is "best of a bad field", ask WHAT is wrong
-  (too human? too villainous?) and trawl the library again with new terms
-  rather than settling.
+  director listens, but expect surprises — fictional-age logic beats timbre
+  logic (a 147 Hz "villain" voice won a ten-year-old character over every
+  deep candidate).
+- Casting-note taxonomy from real rounds — the failure modes to listen for:
+  too quiet / inaudible at mix level, "narrator voice" (too polished to be a
+  person in the scene), and accent drift into caricature.
 
 ## Dubbing / re-voicing (no re-render)
 

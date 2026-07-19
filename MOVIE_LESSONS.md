@@ -18,10 +18,16 @@ image references. The start frame matters more than the prompt: wardrobe, set
 dressing, and any on-screen text mostly come from it, so problems in the frame
 become problems in every clip shot from it.
 
-**Cast the voices before you shoot anything.** Audition ElevenLabs voices on an
-HTML page that shows the character's face next to the audio players, let the
-director pick, and TTS the entire script. Retrofitting voices with dubs after
-the clips existed was the single biggest time sink of the first film.
+**Cast the voices before you shoot anything.** Generate custom voices by
+*prompting* ElevenLabs (voice design) rather than browsing its catalog — the
+stock and searchable voices skew podcaster-generic, and the characterful ones
+veer cartoonish (one candidate was inexplicably a pirate). Describe the voice
+you want for each character, audition the results on an HTML page that shows
+the character's face next to the audio players, and let the director pick; one
+"base" read per candidate is enough — calm/drama delivery variants never
+changed a casting decision. Then TTS the entire script. Retrofitting voices
+with dubs after the clips existed was the single biggest time sink of the
+first film.
 
 With frames and voices in hand, cut an **animatic**: every start frame held for
 its exact cut window, the TTS dialogue laid over the top, scratch music and
@@ -33,8 +39,9 @@ in-point to the *next* shot's in-point, because a concat list has no timeline
 and any gap silently collapses; and if you want a Ken Burns push-in, use the
 `perspective` filter rather than `zoompan` — zoompan rounds its crop origin to
 whole pixels and visibly quivers at slow speeds, while perspective takes
-fractional corners and moves smoothly. Shots that are about stillness should
-just be locked off.
+fractional corners and moves smoothly. Getting this right was fiddly; copy
+`kenburns_vf()` from `tools/templates/make_animatic.py` instead of rederiving
+it. Shots that are about stillness should just be locked off.
 
 Only then generate **clips** with Seedance, giving each shot its start frame,
 its anchors, and its voice references. Use **fast mode at 720p and below** — a
@@ -70,14 +77,12 @@ old take on disk in versioned output folders, so any revert is a one-line edit.
 content flags, stagings the model can't hold — are almost never fixed by a
 third phrasing. Restage the event, or move it off-screen.
 
-**Targeted edits beat re-rolls.** To fix one thing in a frame, pass the
-existing frame back to Nano Banana with "reproduce the reference exactly,
-change only <x>". A re-roll re-rolls everything you liked too.
-
-Taken together, that gives a ladder of fixes from cheapest up: trim in the
-assembler (free), dub a line (a third of a credit), edit the frame (a few
-credits), retake the clip (24–36 credits). Climb it reluctantly, and never
-promise yourself "just one more retake round".
+Every fix has a price — an assembler trim is free, a dub is a third of a
+credit, a regenerated frame a few credits, a retake 24–36 — but they aren't
+interchangeable: the problem dictates the fix. The discipline is just to check,
+before reaching for a retake, whether the note is really a trim, dub, or mix
+problem in disguise, and never to promise yourself "just one more retake
+round".
 
 ## Writing clip prompts
 
@@ -86,7 +91,7 @@ quotes, and three lock blocks that ride along on every prompt in the scene:
 
 The **wardrobe lock** describes everyone in the shot head to toe, plus the set,
 restated word for word in every prompt of the scene — not just the first. Keep
-a face-only variant too, because a lock ending in "wearing a grey cardigan"
+a face-only variant too, because a lock ending in "wearing an orange cardigan"
 quietly wins the argument against "in a wedding dress" later in the sentence.
 
 The **voice lock** pins accent and delivery in words ("measured, dry British —
@@ -110,7 +115,7 @@ On-screen text always comes from the frame ("the text stays exactly as in the
 start image") — asking Seedance to invent legible text gets garble. If a shot
 comes back off-model, check whether that character's anchor was actually passed
 before blaming the model; and don't include a character's lock text in shots
-they aren't in, or the model will summon them — say "X does not appear".
+they aren't in, or the model will summon them.
 
 ## Voices, dubbing, and QC
 
@@ -184,6 +189,24 @@ credits expire at the end of each cycle, so spend leftovers deliberately.
 Clips cap at 15 seconds — size dialogue shots from their TTS audio (total
 audio + 2.5s + 0.8s per speaker) and split any shot or line that exceeds the
 cap before generating.
+
+**`generate cost` is UNRELIABLE — always confirm with `account status` before
+and after ONE real job.** It quoted 0.1 credits for `bytedance_video_upscale`;
+the true price was ~37 cr/clip (~5 cr/s — *more* than generating the clip). Ten
+clips silently burned 374 credits before the discrepancy showed up in the
+balance. For any unfamiliar job type, run one, diff the balance, then decide.
+
+**Don't AI-upscale for a "1080p" upload — it's the wrong tool twice over.** (a)
+It's expensive (see above). (b) It can't fix anything: a glitchy patch of a face
+just comes back bigger, and using it on only some shots reads as inconsistent
+sharpness. What you actually want is the **resolution trick**: YouTube picks its
+bitrate ladder from the UPLOAD RESOLUTION, not the real detail. Encode the
+finished film at **1440p or higher** (`scale=...:flags=lanczos` + a light
+`unsharp`, from the native 480p clips) and YouTube serves it with VP9/AV1 at a
+far higher bitrate than a true-480p upload gets on the stingy H.264 ladder — so
+the SAME source looks cleaner. Free, uniform, no per-clip jobs. Make the master
+FILE itself high-bitrate (CRF ~16 + fat maxrate) or YT sees low-bitrate 1440p and
+throttles anyway. Held stills sourced from 2k PNGs are natively sharp at 1440p.
 
 ## Content filters
 

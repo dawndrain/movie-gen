@@ -1,4 +1,7 @@
-# veo3.mp4 — clip → prompt mapping
+# Veo 3 clip prompts
+
+The finished comparison video: https://www.youtube.com/watch?v=dbwaUy7mXAA&t=40s
+
 
 Montage: `/Users/dawndrain/Movies/veo3.mp4` — 54 clips × 8.008s (432.4s total, 1280×720).
 Prompts: `/Users/dawndrain/Documents/Veo-Flow-prompts.txt` (line numbers below refer to that file).

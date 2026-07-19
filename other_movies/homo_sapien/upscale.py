@@ -1,7 +1,4 @@
 #!/usr/bin/env python3
-# TEMPLATE — copied from other_movies/homo_sapien/upscale.py (per-clip 480p->1080p Bytedance upscale).
-# Project-specific: expects that film's spec/paths. Copy into a new film
-# folder and adapt; the original in other_movies/homo_sapien/ is the working example.
 """Upscale every 480p clip to 1080p with Bytedance Video Upscale.
 
     python3 upscale.py [workers]

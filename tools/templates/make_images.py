@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-# TEMPLATE — copied from carl/make_images.py (batch Nano Banana anchors/frames from a spec).
+# TEMPLATE — copied from other_movies/carl/make_images.py (batch Nano Banana anchors/frames from a spec).
 # Project-specific: expects that film's spec/paths. Copy into a new film
-# folder and adapt; the original in carl/ is the working example.
+# folder and adapt; the original in other_movies/carl/ is the working example.
 """Batch Nano Banana Pro images for DUNGEON CRAWLER CARL (book one animatic).
 
 Usage: python3 make_images.py <stage>    stage in {anchors, frames}

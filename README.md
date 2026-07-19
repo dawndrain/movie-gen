@@ -34,8 +34,12 @@ tools/
   templates/      best-of-breed per-film tools to copy into a new project:
                   animatic, auditions, ambience, images, storyboard, batch
                   emitter, targeted frame edits, upscale, dub pass
-<film>/           one folder per film: story, spec(s), batch scripts,
-                  anchors/ frames/ music/ outputs/ (media is gitignored)
+long_game/        the worked example: story, film_spec.py, storyboard_gen,
+                  archive/ of every iteration script (media is gitignored)
+other_movies/     the other film projects (sagas, Donner Party, Walter's Deal,
+                  the Homo Sapien music video, ...). Copyrighted source texts
+                  and a few fan-IP projects are local-only via .gitignore.
+veo3_compare/     the std-vs-fast blind test harness + prompts
 ```
 
 ## Quickstart for a new film

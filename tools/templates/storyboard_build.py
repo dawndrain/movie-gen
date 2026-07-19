@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-# TEMPLATE — copied from carl/storyboard_build.py (storyboard.html generator).
+# TEMPLATE — copied from other_movies/carl/storyboard_build.py (storyboard.html generator).
 # Project-specific: expects that film's spec/paths. Copy into a new film
-# folder and adapt; the original in carl/ is the working example.
+# folder and adapt; the original in other_movies/carl/ is the working example.
 """storyboard.html for the DCC animatic: every shot in cut order with its
 frame, dialogue, playable segment, and collapsed generation prompt."""
 import html
