@@ -6,19 +6,25 @@ h1{color:#f0b429}h2{color:#f0b429;margin-top:1.6em}
 .line{font-style:italic;color:#b9c0cc;margin:0 0 12px}
 .cand{margin:10px 0}.cand b{font-size:14px;display:block;margin-bottom:3px}
 .real b{color:#f0b429}.prompted b{color:#8fd18f}
-audio{width:360px;height:32px}.note{color:#9aa3b2;font-size:14px}</style>
+.prompt{font-size:12px;color:#7a8494;margin:2px 0 6px;max-width:520px}
+audio{width:340px;height:32px}.note{color:#9aa3b2;font-size:14px}
+.row{display:flex;gap:8px;flex-wrap:wrap}.row div{font-size:12px;color:#9aa3b2}</style>
 <h1>The Long Game — voice auditions</h1>
-<p class=note>The casting format used by later films, retrofitted onto this cast. Per character: 
-<span style='color:#f0b429'>the voice actually in the film</span> (sliced from an approved take — it reads a film line, not the audition line), 
-<span style='color:#8fd18f'>a custom voice designed by prompting ElevenLabs</span> (the current recommended workflow), 
-then three catalog candidates reading the signature line.</p>
+<p class=note>Per character: <span style='color:#f0b429'>the voice actually in the film</span> 
+(sliced from an approved take — it reads a film line, not the audition line), 
+<span style='color:#8fd18f'>custom voices designed by prompting ElevenLabs</span> (the prompt is shown; 
+A/B/C are the three previews one prompt returns), then three catalog candidates.</p>
 <p class=note><a href='index.html' style='color:#f0b429'>cast &amp; voices</a> · 
 <a href='storyboard.html' style='color:#f0b429'>storyboard</a></p>
 <h2>Cass, 17</h2><div class=char>
 <img src=img/cass_17.jpg>
 <div><p class=line>&ldquo;Easy is boring. Put me on hard mode.&rdquo;</p>
 <div class='cand real'><b>The film's actual voice</b><audio controls preload=none src=voice/cass_teen.m4a></audio></div>
-<div class='cand prompted'><b>Prompted custom voice</b><audio controls preload=none src=aud/cass17_prompted.m4a></audio></div>
+<div class='cand prompted'><b>Prompted custom (three previews)</b><div class=prompt>&ldquo;A seventeen-year-old American boy with a flat, LOW, bone-dry monotone. Bored and unimpressed, minimal energy, slight vocal fry, medium-low pitch — his voice finished changing years ago. Clean close-mic studio recording.&rdquo;</div><div class=row>
+<div>A<br><audio controls preload=none src=aud/cass17_promptedA.m4a></audio></div>
+<div>B<br><audio controls preload=none src=aud/cass17_promptedB.m4a></audio></div>
+<div>C<br><audio controls preload=none src=aud/cass17_promptedC.m4a></audio></div>
+</div></div>
 <div class=cand><b>Will</b><audio controls preload=none src=aud/cass17_will.m4a></audio></div>
 <div class=cand><b>Harry</b><audio controls preload=none src=aud/cass17_harry.m4a></audio></div>
 <div class=cand><b>Kai</b><audio controls preload=none src=aud/cass17_kai.m4a></audio></div>
@@ -27,7 +33,7 @@ then three catalog candidates reading the signature line.</p>
 <img src=img/cass_45.jpg>
 <div><p class=line>&ldquo;Take this down, Tertius. Sulfuric acid... will damage your skin.&rdquo;</p>
 <div class='cand real'><b>The film's actual voice</b><audio controls preload=none src=voice/cass_adult_brit.m4a></audio></div>
-<div class='cand prompted'><b>Prompted custom voice</b><audio controls preload=none src=aud/cass45_prompted.m4a></audio></div>
+<div class='cand prompted'><b>Prompted custom</b><div class=prompt>&ldquo;A measured, dry, understated British man in his forties, calm RP accent, weary intelligence, speaks like a patient teacher dictating notes.&rdquo;</div><audio controls preload=none src=aud/cass45_prompted.m4a></audio></div>
 <div class=cand><b>The film&#x27;s clone</b><audio controls preload=none src=aud/cass45_the.m4a></audio></div>
 <div class=cand><b>George</b><audio controls preload=none src=aud/cass45_george.m4a></audio></div>
 <div class=cand><b>Daniel</b><audio controls preload=none src=aud/cass45_daniel.m4a></audio></div>
@@ -36,7 +42,11 @@ then three catalog candidates reading the signature line.</p>
 <img src=img/deshawn.jpg>
 <div><p class=line>&ldquo;Ohhh — Cass wants the SMOKE!&rdquo;</p>
 <div class='cand real'><b>The film's actual voice</b><audio controls preload=none src=voice/deshawn.m4a></audio></div>
-<div class='cand prompted'><b>Prompted custom voice</b><audio controls preload=none src=aud/deshawn_prompted.m4a></audio></div>
+<div class='cand prompted'><b>Prompted custom (three previews)</b><div class=prompt>&ldquo;A tall seventeen-year-old with a surprisingly deep, resonant voice for his age — rich, loud, warm, playful trash-talk swagger, laughs easily. NOT childlike; a young man&#x27;s voice, not a kid&#x27;s. Clean close-mic studio recording.&rdquo;</div><div class=row>
+<div>A<br><audio controls preload=none src=aud/deshawn_promptedA.m4a></audio></div>
+<div>B<br><audio controls preload=none src=aud/deshawn_promptedB.m4a></audio></div>
+<div>C<br><audio controls preload=none src=aud/deshawn_promptedC.m4a></audio></div>
+</div></div>
 <div class=cand><b>Liam</b><audio controls preload=none src=aud/deshawn_liam.m4a></audio></div>
 <div class=cand><b>Tyler</b><audio controls preload=none src=aud/deshawn_tyler.m4a></audio></div>
 <div class=cand><b>Charlie</b><audio controls preload=none src=aud/deshawn_charlie.m4a></audio></div>
@@ -45,7 +55,11 @@ then three catalog candidates reading the signature line.</p>
 <img src=img/milo.jpg>
 <div><p class=line>&ldquo;You were in for ninety seconds.&rdquo;</p>
 <div class='cand real'><b>The film's actual voice</b><audio controls preload=none src=voice/milo.m4a></audio></div>
-<div class='cand prompted'><b>Prompted custom voice</b><audio controls preload=none src=aud/milo_prompted.m4a></audio></div>
+<div class='cand prompted'><b>Prompted custom (three previews)</b><div class=prompt>&ldquo;A young man with a light, quick, precise tenor voice: clipped diction, fast tempo, faintly amused deadpan, wiry kid-genius energy, narrates everyone&#x27;s mistakes. Noticeably lighter and faster than his friends. Clean close-mic studio recording.&rdquo;</div><div class=row>
+<div>A<br><audio controls preload=none src=aud/milo_promptedA.m4a></audio></div>
+<div>B<br><audio controls preload=none src=aud/milo_promptedB.m4a></audio></div>
+<div>C<br><audio controls preload=none src=aud/milo_promptedC.m4a></audio></div>
+</div></div>
 <div class=cand><b>Cooper</b><audio controls preload=none src=aud/milo_cooper.m4a></audio></div>
 <div class=cand><b>August</b><audio controls preload=none src=aud/milo_august.m4a></audio></div>
 <div class=cand><b>Will</b><audio controls preload=none src=aud/milo_will.m4a></audio></div>
@@ -54,7 +68,7 @@ then three catalog candidates reading the signature line.</p>
 <img src=img/mom.jpg>
 <div><p class=line>&ldquo;Bren — Isa has the flux again. You need to go fetch more water.&rdquo;</p>
 <div class='cand real'><b>The film's actual voice</b><audio controls preload=none src=voice/mom_bronze.m4a></audio></div>
-<div class='cand prompted'><b>Prompted custom voice</b><audio controls preload=none src=aud/mom_prompted.m4a></audio></div>
+<div class='cand prompted'><b>Prompted custom</b><div class=prompt>&ldquo;A weathered, brisk, no-nonsense mother in her forties from an ancient farming village, warm underneath, tired, commanding.&rdquo;</div><audio controls preload=none src=aud/mom_prompted.m4a></audio></div>
 <div class=cand><b>Matilda</b><audio controls preload=none src=aud/mom_matilda.m4a></audio></div>
 <div class=cand><b>Lily</b><audio controls preload=none src=aud/mom_lily.m4a></audio></div>
 <div class=cand><b>Bella</b><audio controls preload=none src=aud/mom_bella.m4a></audio></div>
@@ -63,7 +77,11 @@ then three catalog candidates reading the signature line.</p>
 <img src=img/peter.jpg>
 <div><p class=line>&ldquo;It&#x27;s a booth you SIT in, uncle — you live a whole LIFE in an hour!&rdquo;</p>
 <div class='cand real'><b>The film's actual voice</b><audio controls preload=none src=voice/peter.m4a></audio></div>
-<div class='cand prompted'><b>Prompted custom voice</b><audio controls preload=none src=aud/peter_prompted.m4a></audio></div>
+<div class='cand prompted'><b>Prompted custom (three previews)</b><div class=prompt>&ldquo;A bright, eager English man in his mid-twenties, nineteen-twenties RP. Energetic and earnest but GROUNDED: solid chest voice, natural conversational rhythm, absolutely not breathy, not airy, not sing-song. Speeds up when excited. Clean close-mic studio recording.&rdquo;</div><div class=row>
+<div>A<br><audio controls preload=none src=aud/peter_promptedA.m4a></audio></div>
+<div>B<br><audio controls preload=none src=aud/peter_promptedB.m4a></audio></div>
+<div>C<br><audio controls preload=none src=aud/peter_promptedC.m4a></audio></div>
+</div></div>
 <div class=cand><b>wc_ethan (prompted custom)</b><audio controls preload=none src=aud/peter_wc_ethan.m4a></audio></div>
 <div class=cand><b>Kevin</b><audio controls preload=none src=aud/peter_kevin.m4a></audio></div>
 <div class=cand><b>wc_sebastian (prompted custom)</b><audio controls preload=none src=aud/peter_wc_sebastian.m4a></audio></div>
