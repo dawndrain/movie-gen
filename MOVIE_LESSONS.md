@@ -179,8 +179,8 @@ sounded right ran nearer 18-22 under during dialogue; (3) **integrated-LUFS
 normalization under-reads a cue's LOUD passages** — a quiet intro dilutes
 the average, so the normalized chorus plays several dB hotter than nominal,
 usually right under a line (same averaging-window bug as the crickets, one
-level up). Copy the `speech_anchor()` + mix graph from
-`other_movies/carl/make_animatic.py` instead of re-deriving this. And since none of us here have ears, `listen.py` sends any audio to
+level up). Copy the `speech_anchor()` + ducked mix graph from
+`tools/templates/make_animatic.py` instead of re-deriving this. And since none of us here have ears, `listen.py` sends any audio to
 Gemini — but only ever ask it to FIND FAULTS or compare A vs B, never to rate
 quality. Prompted adversarially it catches whines, wrong-content beds, and
 "this sounds like tinnitus" that no meter shows; asked "is this good?" it
@@ -248,13 +248,15 @@ references and the output video itself are not checked.
 
 ## Setup
 
-Auth is browser OAuth (`higgsfield auth login`) followed by
+Install the CLI with `npm i -g @higgsfield/cli` (Node 18+). Auth is browser
+OAuth (`higgsfield auth login`) followed by
 `higgsfield workspace set <id>` — without the workspace step nothing works.
 The npm CLI is the only path to Seedance 2.0 and Nano Banana Pro. **Don't buy
 Higgsfield "Unlimited"** — unlimited generation only works in their web UI;
 CLI/API jobs bill normal credits regardless (verified: the CLI has no
 unlimited flag and web-toggle params can't be forwarded). API keys
-live at `~/.elevenlabs_key`, `~/.gemini_key`, and `~/.fal_key`. `gen.py`
+live at `~/.elevenlabs_key` and `~/.gemini_key` (plus `~/.fal_key` if using
+fal.ai as an alternate Seedance provider). `gen.py`
 (video/image generation) sits at the repo root; the other shared tools
 (pool_run, dub_clip, pitch_check, listen) live in `tools/`; each film is its
 own subfolder, and `long_game/` is the template

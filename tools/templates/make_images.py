@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-# TEMPLATE — copied from other_movies/carl/make_images.py (batch Nano Banana anchors/frames from a spec).
-# Project-specific: expects that film's spec/paths. Copy into a new film
-# folder and adapt; the original in other_movies/carl/ is the working example.
-"""Batch Nano Banana Pro images for DUNGEON CRAWLER CARL (book one animatic).
+# TEMPLATE — batch Nano Banana anchors/frames from a spec.
+# Originated in a local-only project; this template is the canonical copy.
+# Project-specific paths/spec: copy into a new film folder and adapt.
+"""Batch Nano Banana Pro images for a film's anchors and start frames.
 
 Usage: python3 make_images.py <stage>    stage in {anchors, frames}
 Skips images whose output exists (re-run = retry pass). `frames` needs

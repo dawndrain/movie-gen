@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-# TEMPLATE — copied from other_movies/carl/storyboard_build.py (storyboard.html generator).
-# Project-specific: expects that film's spec/paths. Copy into a new film
-# folder and adapt; the original in other_movies/carl/ is the working example.
-"""storyboard.html for the DCC animatic: every shot in cut order with its
+# TEMPLATE — storyboard.html generator.
+# Originated in a local-only project; this template is the canonical copy.
+# Project-specific paths/spec: copy into a new film folder and adapt.
+"""storyboard.html for the animatic: every shot in cut order with its
 frame, dialogue, playable segment, and collapsed generation prompt."""
 import html
 import sys
@@ -37,7 +37,7 @@ for idx, shot in enumerate(spec.ORDER):
   </div>
 </div>""")
 
-page = f"""<!doctype html><meta charset="utf-8"><title>DCC book one — storyboard</title>
+page = f"""<!doctype html><meta charset="utf-8"><title>Storyboard</title>
 <style>
 body {{ background:#141417; color:#e8e8ea; font: 15px/1.5 -apple-system, sans-serif;
        max-width: 1180px; margin: 24px auto; padding: 0 16px; }}

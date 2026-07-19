@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-# TEMPLATE — copied from other_movies/carl/make_ambience.py (ambience beds (ElevenLabs sound-gen -> EQ -> stitch -> loudnorm)).
-# Project-specific: expects that film's spec/paths. Copy into a new film
-# folder and adapt; the original in other_movies/carl/ is the working example.
-"""Ambience beds for DUNGEON CRAWLER CARL via ElevenLabs sound-generation.
+# TEMPLATE — ambience beds (ElevenLabs sound-gen -> EQ -> stitch -> loudnorm).
+# Originated in a local-only project; this template is the canonical copy.
+# Project-specific paths/spec: copy into a new film folder and adapt.
+"""Ambience beds via ElevenLabs sound-generation.
 
 Playbook recipe: 22s texture -> EQ (highpass 100 / lowpass 7k, kills the baked-in
 HF whine) -> crossfade-stitch to ~300s loop -> loudnorm to -30 LUFS.

@@ -1,10 +1,12 @@
 # movie-gen — AI filmmaking with Higgsfield
 
 A working pipeline for making short films (5–12 minutes, dozens of shots,
-consistent characters and voices) with Seedance 2.0, Nano Banana Pro, Sonilo,
-ElevenLabs, and a lot of ffmpeg. About ten films have been made this way; the
-first complete one, **The Long Game** (an 11-minute comedy, ~80 shots, 18
-iteration passes), lives in `long_game/` as the worked example.
+consistent characters and voices) with Seedance 2.0 (video), Nano Banana Pro
+(images), Sonilo (music) — all three via Higgsfield's CLI — plus ElevenLabs
+(voices), Gemini (audio/image QC), and a lot of ffmpeg. About ten films have
+been made this way; the first complete one, **The Long Game** (an 11-minute
+comedy, ~80 shots, 18 iteration passes), lives in `long_game/` as the worked
+example.
 
 A taste of the output: [The Long Game's cast, voices, and start frames](docs/long_game/index.html) (open locally, or via Pages once public) — and [the finished film](https://www.youtube.com/watch?v=q40M08SOhGs).
 
@@ -46,8 +48,15 @@ veo3_compare/     the std-vs-fast blind test harness + prompts
 
 ## Quickstart for a new film
 
-1. `higgsfield auth login` && `higgsfield workspace set <id>`; put API keys at
-   `~/.elevenlabs_key`, `~/.gemini_key`.
+Prerequisites: Python 3.10+, `ffmpeg`/`ffprobe` on PATH, Node 18+ for the
+Higgsfield CLI (`npm i -g @higgsfield/cli` — the only path to Seedance 2.0 /
+Nano Banana Pro), and `pip install numpy` (pitch_check). Optional per tool:
+`edge-tts` (free draft TTS), `demucs` + Whisper (dub QC).
+
+1. `npm i -g @higgsfield/cli`, then `higgsfield auth login` &&
+   `higgsfield workspace set <id>`; put API keys at `~/.elevenlabs_key` and
+   `~/.gemini_key` (`~/.fal_key` only if using fal.ai as an alternate
+   Seedance provider).
 2. Make a folder, write the treatment, then follow the pipeline order in
    MOVIE_LESSONS.md — anchors, frames, voices, **animatic first**.
 3. Copy what you need from `tools/templates/` and adapt its spec imports.

@@ -4,6 +4,11 @@
 > version. This file keeps the complete detail: per-project addenda (add
 > new ones here, at the top, as before), API recipes, and war stories.
 > When an addendum lesson generalizes, promote a one-liner into the short doc.
+> **Historical-path note:** addenda reference files as they existed at the
+> time of writing. Media dirs (frames/, vo/, music/, dub/, ...) are gitignored,
+> and some projects (carl/, animorphs/, mewtwo/) are local-only adaptations of
+> copyrighted works that never ship — their reusable code lives on in
+> `tools/templates/`. Don't expect every path here to resolve in a fresh clone.
 > (2026-07-18: film folders other than long_game/ moved under other_movies/ —
 > addenda paths like carl/... now mean other_movies/carl/...)
 > (2026-07-18, Carl): Gemini audio QC is SYCOPHANTIC as a rater — scored every

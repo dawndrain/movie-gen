@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-# TEMPLATE — copied from other_movies/carl/make_animatic.py (animatic builder (TTS + stills + perspective Ken Burns + LUFS beds)).
-# Project-specific: expects that film's spec/paths. Copy into a new film
-# folder and adapt; the original in other_movies/carl/ is the working example.
-"""Build the DCC animatic: TTS dialogue + stills held for their cut windows
-with quiver-free perspective Ken Burns + music/ambience beds at LUFS-derived
-levels. Specs live in spec.py.
+# TEMPLATE — animatic builder (TTS + stills + perspective Ken Burns + LUFS beds).
+# Originated in a local-only project; this template is the canonical copy.
+# Project-specific paths/spec: copy into a new film folder and adapt.
+"""Build the animatic: TTS dialogue + stills held for their cut windows
+with quiver-free perspective Ken Burns + music/ambience beds at
+speech-anchored LUFS levels with sidechain ducking. Specs live in spec.py.
 
 Usage: python3 make_animatic.py tts          # vo/ mp3s (skips existing)
        python3 make_animatic.py build        # per-shot segments + concat
@@ -34,6 +34,10 @@ W, H, FPS, SS = 1280, 720, 24, 2
 HEAD, GAP, TAIL = 0.5, 0.5, 0.9
 DEFAULT_HOLD = 4.0
 FONT = "/System/Library/Fonts/Helvetica.ttc"
+
+# sidechain duck of the bed bus under dialogue (static beds with no ducking
+# read loud under every speech onset no matter the offset)
+DUCK = "sidechaincompress=threshold=0.02:ratio=8:attack=80:release=900"
 
 
 def dur_of(p: Path) -> float:
@@ -165,10 +169,18 @@ def spans_from_marks(marks: dict, offsets: dict, total: float,
     return spans
 
 
-def measure_lufs(p: Path) -> float:
+def speech_anchor() -> float:
+    """Integrated LUFS of the dialogue lines ALONE. Measured speech-only for
+    predictability: a whole-film measurement is diluted by silent holds, and
+    since dialogue is never re-gained, a diluted (lower) anchor places the
+    beds QUIETER, not louder. Loud-music fixes live elsewhere: sidechain duck
+    + lower offsets."""
+    listing = HERE / "outputs" / "_speech_concat.txt"
+    mp3s = sorted(VO.glob("*.mp3"))
+    listing.write_text("".join(f"file '{p.resolve()}'\n" for p in mp3s))
     res = subprocess.run(
-        ["ffmpeg", "-i", str(p), "-af", "ebur128", "-f", "null", "-"],
-        capture_output=True, text=True)
+        ["ffmpeg", "-f", "concat", "-safe", "0", "-i", str(listing),
+         "-af", "ebur128", "-f", "null", "-"], capture_output=True, text=True)
     m = re.findall(r"I:\s*(-?[\d.]+)\s*LUFS", res.stderr)
     return float(m[-1])
 
@@ -187,11 +199,11 @@ def mix_phase(label: str):
     subprocess.run(["ffmpeg", "-y", "-v", "error", "-f", "concat", "-safe", "0",
                     "-i", str(concat_list), "-c", "copy", str(base)], check=True)
 
-    anchor = measure_lufs(base)
+    anchor = speech_anchor()
     mus_gain = (anchor + spec.MUSIC_DB) - (-30.0)
     amb_gain = (anchor + spec.AMB_DB) - (-30.0)
-    print(f"dialogue anchor {anchor:.1f} LUFS -> music {mus_gain:+.1f} dB, "
-          f"ambience {amb_gain:+.1f} dB")
+    print(f"speech anchor {anchor:.1f} LUFS -> music {mus_gain:+.1f} dB, "
+          f"ambience {amb_gain:+.1f} dB, + sidechain duck under dialogue")
 
     mspans = spans_from_marks(spec.MUSIC_MARKS, offsets, total, {"silence"})
     aspans = spans_from_marks(spec.AMB_MARKS, offsets, total, {"none"})
@@ -212,9 +224,14 @@ def mix_phase(label: str):
                   f"volume={gain:.1f}dB,adelay={int(s * 1000)}|{int(s * 1000)},"
                   f"apad,atrim=duration={total:.3f}[s{k}]")
         labels.append(f"[s{k}]")
-    fc.append("[0:a]" + "".join(labels)
-              + f"amix=inputs={len(labels) + 1}:normalize=0:duration=first,"
-              + f"afade=t=out:st={total - 3:.2f}:d=3[am]")
+    if labels:
+        fc.append("".join(labels)
+                  + f"amix=inputs={len(labels)}:normalize=0:duration=longest[beds]")
+        fc.append(f"[beds][0:a]{DUCK}[bedsd]")
+        fc.append(f"[0:a][bedsd]amix=inputs=2:normalize=0:duration=first,"
+                  f"afade=t=out:st={total - 3:.2f}:d=3[am]")
+    else:
+        fc.append(f"[0:a]afade=t=out:st={total - 3:.2f}:d=3[am]")
     graph = SEG / "mix_graph.txt"
     graph.write_text(";".join(fc))
     out = HERE / "outputs" / f"animatic_{label}.mp4"

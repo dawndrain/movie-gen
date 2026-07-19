@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-# TEMPLATE — copied from other_movies/carl/make_auditions.py (ElevenLabs voice auditions page (portrait next to players, pitch stats)).
-# Project-specific: expects that film's spec/paths. Copy into a new film
-# folder and adapt; the original in other_movies/carl/ is the working example.
-"""TTS voice auditions for DUNGEON CRAWLER CARL, with median-F0 pitch stats,
+# TEMPLATE — ElevenLabs voice auditions page (portrait next to players, pitch stats).
+# Originated in a local-only project; this template is the canonical copy.
+# Project-specific paths/spec: copy into a new film folder and adapt.
+"""TTS voice auditions with median-F0 pitch stats,
 plus auditions.html pairing each character's anchor portrait with the playable
 candidates. Usage: python3 make_auditions.py   (skips existing; re-run = retry)
 """
