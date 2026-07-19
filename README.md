@@ -6,7 +6,7 @@ ElevenLabs, and a lot of ffmpeg. About ten films have been made this way; the
 first complete one, **The Long Game** (an 11-minute comedy, ~80 shots, 18
 iteration passes), lives in `long_game/` as the worked example.
 
-A taste of the output: [The Long Game's cast, voices, and start frames](docs/long_game/index.html) (open locally, or via Pages once public) — and [the finished film](https://www.youtube.com/watch?v=dbwaUy7mXAA).
+A taste of the output: [The Long Game's cast, voices, and start frames](docs/long_game/index.html) (open locally, or via Pages once public) — and [the finished film](https://www.youtube.com/watch?v=q40M08SOhGs).
 
 **Start with [MOVIE_LESSONS.md](MOVIE_LESSONS.md)** — the distilled playbook:
 the pipeline, the laws (retakes regress; after two failed rewordings change
