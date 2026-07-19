@@ -680,6 +680,15 @@ Other prompt lessons:
   generate candidate voices, keep the winners — produces distinctive,
   cast-able voices and is now the default workflow. (This postdates The Long
   Game, which was cast from catalog voices + clones of approved takes.)
+  Prompt-craft for voice design (Long Game retrofit round): every adjective is
+  taken LITERALLY — "slightly breathless" produced an airy sing-song lilt;
+  "teenage boy + playful" skewed childlike. Differentiate same-demographic
+  characters by PITCH and TEMPO ("light quick tenor, faster than his friends"),
+  not by adjectives, or they converge. Always append "clean close-mic studio
+  recording" or previews come back lo-fi. One prompt returns THREE previews —
+  keep and audition all three, don't take the first. And "seventeen-year-old"
+  + pitch words can trip the safety filter (reads as child-voice creation);
+  age-neutral wording ("young man with a light tenor") passes.
 - Build an **audition page** (see `tools/templates/make_auditions.py`) and let
   the director cast from it: one section per character with the character's
   anchor portrait displayed next to the audio players — hearing a voice while
