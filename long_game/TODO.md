@@ -100,6 +100,11 @@ music/mus_credits.m4a (ominous minor-key arcade chiptune, sonilo).
   in-mix sampler audition. Final v18 config: arcade/baths -12dB, bronze (ends
   pre-party)/workshop/ren_city/1926 -16dB, all -30 LUFS normalized + EQ'd.
   Gemini verdict on the final mix: READY TO SHIP.
+  [CORRECTION 2026-07-18: Gemini's audio verdicts aged badly — the "whine in
+  ALL beds" was mostly loudnorm boosting one near-silent bed's noise floor
+  (+39dB), and in later use it rated an inaudible voice "flawless". Use
+  listen.py for fault-finding leads only, confirm by FFT/ebur128 — see
+  MOVIE_LESSONS.md.]
 - Beds are textures only (hum/water/wind/murmur, "no sudden events" in the
   prompt) so they never fight Seedance's sparse native ambience; skipped
   boiler-yard, machine act, ski run where native SFX/music already carry it.
