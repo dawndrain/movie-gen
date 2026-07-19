@@ -1,5 +1,9 @@
 # The Long Game — resume notes (updated 2026-07-10)
 
+PUBLISHED: https://www.youtube.com/watch?v=q40M08SOhGs (upload master:
+outputs/previews/youtube_v18_1080p.mp4). Dawn's earlier veo3 compilation:
+https://www.youtube.com/watch?v=dbwaUy7mXAA
+
 Current best cut: outputs/previews/preview_v17.mp4 · storyboard_v17.html
 Dawn: "diminishing returns land" — treat v17 as near-locked.
 
