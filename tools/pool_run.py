@@ -5,7 +5,7 @@ Higgsfield ultra allows 8 concurrent seedance jobs; we keep 7 in flight. Skips s
 whose output mp4 already exists, so it double-serves as the retry runner.
 
 Usage (from a PROJECT folder, e.g. long_game/):
-    python3 ../pool_run.py videos_v3.sh outputs/video3 [workers] [fast]
+    python3 ../tools/pool_run.py videos_v3.sh outputs/video3 [workers] [fast]
 Script, outdir, and all relative media paths resolve against the current working
 directory (the project folder); gen.py is found next to this script.
 Pass "fast" to drop --std (draft mode: ~3 min/clip, half credits).
@@ -16,7 +16,7 @@ import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
-TOOLS = Path(__file__).parent          # shared gen.py lives here
+TOOLS = Path(__file__).parent.parent    # gen.py lives at the repo root
 ROOT = Path.cwd()                       # the project folder
 script, outdir = ROOT / sys.argv[1], ROOT / sys.argv[2]
 workers = int(sys.argv[3]) if len(sys.argv) > 3 else 7

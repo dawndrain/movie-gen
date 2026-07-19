@@ -10,7 +10,8 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
-ROOT = Path(__file__).parent
+TOOLS = Path(__file__).parent.parent    # gen.py at the repo root
+ROOT = Path.cwd()                       # run from the project folder
 script, outdir = ROOT / sys.argv[1], ROOT / sys.argv[2]
 workers = int(sys.argv[3]) if len(sys.argv) > 3 else 7
 outdir.mkdir(parents=True, exist_ok=True)
@@ -29,7 +30,7 @@ def run(job):
     dest = outdir / f"{name}.mp4"
     if dest.exists():
         return f"SKIP {name}"
-    cmd = [str(ROOT / "gen.py"), "video", prompt,
+    cmd = [str(TOOLS / "gen.py"), "video", prompt,
            "--resolution", "480p", "--duration", dur] + rest
     for attempt in range(1, 9):
         r = subprocess.run(cmd, capture_output=True, text=True, cwd=ROOT)

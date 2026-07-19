@@ -162,9 +162,25 @@ needs more than ~12dB of gain to reach target, it isn't quiet, it's a failed
 generation (ElevenLabs sometimes returns near-silence), and boosting it just
 amplifies the noise floor into a mechanical drone — regenerate or drop it. A
 `-inf` loudness measurement is that failure announcing itself. Normalize every stem to a common
--30 LUFS, measure the film's dialogue loudness once with ebur128, and then
-every bed and cue is a simple dB offset below that anchor (ambience sits 12–16
-dB under). And since none of us here have ears, `listen.py` sends any audio to
+-30 LUFS, then measure the dialogue anchor with ebur128 on the **concatenated
+dialogue lines ALONE — never on the whole film** (whole-film integrated LUFS
+is diluted by silent holds; note this dilution makes beds placed against it
+QUIETER, not louder — measure speech-only for predictability, not as a
+loudness fix. An earlier version of this paragraph called the diluted anchor
+the root cause of loud music; the director sign-checked the arithmetic and
+that was backwards). What actually makes music drown dialogue, per Carl v2:
+(1) **no ducking** — a statically-placed bed at even a correct level reads
+as competing the moment a line starts; **sidechain-duck the whole bed bus
+under the dialogue track**
+(`sidechaincompress=threshold=0.02:ratio=8:attack=80:release=900`) — worth
+~8dB during overlaps and the single biggest fix; (2) static offsets too hot
+— music ~15dB under the speech anchor, ambience ~16, and the mixes that
+sounded right ran nearer 18-22 under during dialogue; (3) **integrated-LUFS
+normalization under-reads a cue's LOUD passages** — a quiet intro dilutes
+the average, so the normalized chorus plays several dB hotter than nominal,
+usually right under a line (same averaging-window bug as the crickets, one
+level up). Copy the `speech_anchor()` + mix graph from
+`other_movies/carl/make_animatic.py` instead of re-deriving this. And since none of us here have ears, `listen.py` sends any audio to
 Gemini — but only ever ask it to FIND FAULTS or compare A vs B, never to rate
 quality. Prompted adversarially it catches whines, wrong-content beds, and
 "this sounds like tinnitus" that no meter shows; asked "is this good?" it
@@ -234,10 +250,14 @@ references and the output video itself are not checked.
 
 Auth is browser OAuth (`higgsfield auth login`) followed by
 `higgsfield workspace set <id>` — without the workspace step nothing works.
-The npm CLI is the only path to Seedance 2.0 and Nano Banana Pro. API keys
-live at `~/.elevenlabs_key`, `~/.gemini_key`, and `~/.fal_key`. Shared tools
-sit at the repo root (gen.py, pool_run.py, dub_clip.py, pitch_check.py,
-listen.py); each film is its own subfolder, and `long_game/` is the template
+The npm CLI is the only path to Seedance 2.0 and Nano Banana Pro. **Don't buy
+Higgsfield "Unlimited"** — unlimited generation only works in their web UI;
+CLI/API jobs bill normal credits regardless (verified: the CLI has no
+unlimited flag and web-toggle params can't be forwarded). API keys
+live at `~/.elevenlabs_key`, `~/.gemini_key`, and `~/.fal_key`. `gen.py`
+(video/image generation) sits at the repo root; the other shared tools
+(pool_run, dub_clip, pitch_check, listen) live in `tools/`; each film is its
+own subfolder, and `long_game/` is the template
 worth copying. The repo (github.com/dawndrain/movie-gen, private) excludes
 media and any project adapting a copyrighted source — add such projects to
 .gitignore BEFORE committing. Everything else is in MOVIE_LESSONS_FULL.md.

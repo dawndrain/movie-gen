@@ -1,4 +1,4 @@
-# videogen — AI filmmaking with Higgsfield
+# movie-gen — AI filmmaking with Higgsfield
 
 A working pipeline for making short films (5–12 minutes, dozens of shots,
 consistent characters and voices) with Seedance 2.0, Nano Banana Pro, Sonilo,
@@ -26,16 +26,16 @@ storyboard.html + preview → director notes → cheapest fix per note → repea
 
 ```
 gen.py            submit Seedance / Nano Banana jobs (handles the 8-job cap)
-pool_run.py       batch runner; skips finished shots, so re-run = retry
-dub_clip.py       replace a line's audio without re-rendering
-pitch_check.py    median-F0 screen for wrong-voice takes
-listen.py         Gemini listens to audio and gives QC verdicts
 tools/
+  pool_run.py     batch runner; skips finished shots, so re-run = retry
   assemble.py     spec-driven film assembler (cuts, music spans, ambience
                   beds, grades, fades) — see long_game/film_spec.py
+  dub_clip.py     replace a line's audio without re-rendering
+  pitch_check.py  median-F0 screen for wrong-voice takes
+  listen.py       Gemini listens to audio for QC (fault-finding prompts only)
   templates/      best-of-breed per-film tools to copy into a new project:
                   animatic, auditions, ambience, images, storyboard, batch
-                  emitter, targeted frame edits, upscale, dub pass
+                  emitter, frame edits, upscale, dub pass
 long_game/        the worked example: story, film_spec.py, storyboard_gen,
                   archive/ of every iteration script (media is gitignored)
 other_movies/     the other film projects (sagas, Donner Party, Walter's Deal,
@@ -51,8 +51,8 @@ veo3_compare/     the std-vs-fast blind test harness + prompts
 2. Make a folder, write the treatment, then follow the pipeline order in
    MOVIE_LESSONS.md — anchors, frames, voices, **animatic first**.
 3. Copy what you need from `tools/templates/` and adapt its spec imports.
-4. Generate clips via a batch script + `python3 ../pool_run.py videos_v1.sh
-   outputs/video1 7`, assemble with `python3 ../tools/assemble.py
+4. Generate clips via a batch script + `python3 ../tools/pool_run.py
+   videos_v1.sh outputs/video1 7`, assemble with `python3 ../tools/assemble.py
    film_spec.py`, review via the storyboard, iterate.
 
 Media (clips, frames, audio, previews) is deliberately not in git — only

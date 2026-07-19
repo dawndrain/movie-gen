@@ -15,6 +15,21 @@
 > inaudible and the normalized file is a mechanical drone. Guard: >12dB of
 > required gain = failed generation; regenerate or drop, never boost.
 
+> Addendum (2026-07-18, "The Vaulted Sky" — the reclaimed-originals dead end,
+> CLOSED, do not reopen):
+> - Cropping a filter-blocked canonical start frame (character partial /
+>   off-frame) DOES pass the gate — but then the character has no in-frame
+>   identity anchor and DISTORTS the moment motion brings them in. Adding
+>   canonical --image refs to fix identity re-trips the gate on those hot
+>   frames. Both sides of the squeeze verified; there is no configuration
+>   where a canonical-composition start frame drives on-model video here.
+> - The stable equilibrium remains the from-behind recipe: character IN the
+>   start frame (identity) but rear/partial-profile (filter-safe). Canonical
+>   frontal compositions are stills-only: storyboard, animatic, inserts, art.
+> - Cross-provider note (director experience): Google/Veo doesn't hard-block
+>   IP inputs — it quietly GENERICIZES iconic characters instead (Yu-Gi-Oh
+>   test, 2025). Different dodge, same outcome.
+
 > Addendum (2026-07-12, "The Vaulted Sky" v2 convergence — the complete
 > input-filter model, ~9 rounds of evidence):
 > - The gate is an ADDITIVE, partly STOCHASTIC multimodal score over
@@ -93,6 +108,24 @@
 >   instruction, not the audio — in BOTH directions. Meter-verify every
 >   concrete Gemini claim before spending a fix on it; treat its taste
 >   notes as hypotheses for the director's ears only.
+> - (added 07-18, CORRECTED 07-19) **The "music too loud" fix, with the causal
+>   story straightened out by the director's sign-check**: the 07-18 version
+>   of this bullet blamed the whole-film-LUFS dialogue anchor ("diluted
+>   anchor -> offsets land hot"). That's BACKWARDS: dialogue is never
+>   re-gained in this pipeline, so a diluted (lower) anchor places beds
+>   LOWER relative to true speech — v1's music sat 13.4dB under speech, not
+>   the nominal 12. The dilution can't cause loud music (Dawn caught this
+>   in the arithmetic; logged as a case study in confident misdiagnosis —
+>   the numbers were all on hand and the sign still went unchecked).
+>   What actually fixed v2: (1) sidechain-ducking the whole bed bus under
+>   the dialogue track (~8dB during overlaps, the dominant fix); (2) offsets
+>   lowered -12 -> -15/-16; (3) still open: integrated-LUFS normalization
+>   under-reads a cue's loud passages (quiet intro dilutes the average, the
+>   chorus plays hot under a line — same averaging-window bug as the
+>   mean-volume crickets, one level up; per-cue dynamics or a limiter on
+>   the bed bus would close it). speech_anchor() stays — measure speech-only
+>   for predictability — but it was ~1.4dB in the QUIET direction, not the
+>   cause. Copy carl's mix phase (duck included) for new projects.
 > - (added 07-18) **median-F0 measures the note, not the "depth"**: bellowing
 >   characters (Maestro, the Juicer) legitimately read 225-245 Hz — shouting
 >   raises the fundamental — while calm deep briefs sat 100-130 Hz. Perceived
@@ -157,10 +190,16 @@
 >      quiver — and it is worst precisely on slow moves, i.e. on Ken Burns. It
 >      looks fine in the punchy 2-second demo and fails in the real use case,
 >      which is how a bad default became folklore.
->   2. **The canonical `z='min(zoom+0.001,1.5)'` form is itself broken with `d=1`**
->      — the `zoom` accumulator RESETS every input frame, so it never accumulates.
->      Measured: mean motion 0.000 with 454% variability. It is not zooming at all;
->      it is a static image that jerks. A lot of people are shipping this.
+>   2. **The canonical `z='min(zoom+0.001,1.5)'` form is a SEPARATE, second bug**
+>      — with `d=1` the `zoom` accumulator RESETS every input frame, so it never
+>      accumulates: zoom pins at ~1.0015 and the clip is FROZEN. (Verified 2026-07:
+>      110/149 frames byte-identical, max change 0.012/255 — it does NOT jerk, it
+>      just sits there. An earlier note here wrongly called it "a static image that
+>      jerks"; a relative motion metric had fooled me by counting encoder noise on a
+>      zero signal as snaps. The two failure modes are distinct: this recipe is
+>      frozen; bug #1's quiver only appears once the zoom ACTUALLY accumulates,
+>      e.g. when driven by `on`.) A lot of people ship this frozen non-zoom.
+>      Demo of all three states: `outputs/previews/kenburns_three_modes.mp4`.
 >
 >   Supersampling before zoompan only shrinks the quantum (1/4 px at 4x) — it never
 >   removes the staircase. The RIGHT answer is continuous resampling: sample the
@@ -492,7 +531,7 @@ project-specific discoveries.
 
 - **Top level = shared tools**, used by every movie project: `gen.py` (Seedance/Nano
   Banana wrapper; downloads land in the shared `outputs/raw/`), `pool_run.py` (batch
-  runner — run it FROM a project folder: `python3 ../pool_run.py videos_vN.sh
+  runner — run it FROM a project folder: `python3 ../tools/pool_run.py videos_vN.sh
   outputs/videoN [workers] [fast]`), `dub_clip.py`, `pitch_check.py`, and this file.
 - **Each movie is a subfolder** (`long_game/`, `animorphs/`, `mewtwo/`, ...) holding
   its story md, `videos_v*.sh` batch scripts, `assemble_v*.py`, `storyboard_gen.py`,
