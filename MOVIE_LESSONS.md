@@ -161,9 +161,15 @@ an amplitude meter but loud to the ear. Normalize every stem to a common
 -30 LUFS, measure the film's dialogue loudness once with ebur128, and then
 every bed and cue is a simple dB offset below that anchor (ambience sits 12–16
 dB under). And since none of us here have ears, `listen.py` sends any audio to
-Gemini for an actual listening verdict — audition every bed and cue before it
-enters the mix, and the finished mix after. It catches whines, wrong-content
-beds, and "this sounds like tinnitus" that no meter will ever show.
+Gemini — but only ever ask it to FIND FAULTS or compare A vs B, never to rate
+quality. Prompted adversarially it catches whines, wrong-content beds, and
+"this sounds like tinnitus" that no meter shows; asked "is this good?" it
+calls everything flawless, including a voice that was literally inaudible.
+And even its fault reports pattern-complete: it found one real whine (spectrum-
+verified, +18 dB narrowband spike) then claimed the same whine in beds that
+measure clean. Treat its findings as leads — confirm with an FFT/ebur128
+measurement before mass-applying a fix. Audibility and level questions are
+measurements, not listening questions.
 
 ## Batches and money
 

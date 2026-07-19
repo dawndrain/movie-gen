@@ -70,3 +70,6 @@ other_movies/homo_sapien/lyrics_timed.md
 other_movies/homo_sapien/STORYBOARD.md
 other_movies/homo_sapien/storyboard_gen.py
 other_movies/homo_sapien/animatic.py
+
+# curated showcase assets are the exception to the media bans
+!docs/**

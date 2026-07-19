@@ -6,6 +6,10 @@
 > When an addendum lesson generalizes, promote a one-liner into the short doc.
 > (2026-07-18: film folders other than long_game/ moved under other_movies/ —
 > addenda paths like carl/... now mean other_movies/carl/...)
+> (2026-07-18, Carl): Gemini audio QC is SYCOPHANTIC as a rater — scored every
+> audition voice "flawless/10/10" including an inaudible one. Use listen.py only
+> with adversarial find-the-fault prompts or A/B comparisons; audibility/level
+> questions are ebur128 measurements, not listening questions.
 
 > Addendum (2026-07-12, "The Vaulted Sky" v2 convergence — the complete
 > input-filter model, ~9 rounds of evidence):
