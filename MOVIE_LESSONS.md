@@ -155,40 +155,46 @@ naming what you *don't* want — grassland prompts default to crickets. Then EQ
 them (high-pass 100 Hz, low-pass 7 kHz, which also removes ElevenLabs' baked-in
 high-frequency whine), crossfade-stitch to five minutes, and normalize.
 
-The mixing rule that prevents every "the music is overpowering" round: set all
-levels in LUFS, never in mean volume — spiky sounds like crickets read quiet on
-an amplitude meter but loud to the ear. One guard on the normalizer: if a bed
-needs more than ~12dB of gain to reach target, it isn't quiet, it's a failed
-generation (ElevenLabs sometimes returns near-silence), and boosting it just
-amplifies the noise floor into a mechanical drone — regenerate or drop it. A
-`-inf` loudness measurement is that failure announcing itself. Normalize every stem to a common
--30 LUFS, then measure the dialogue anchor with ebur128 on the **concatenated
-dialogue lines ALONE — never on the whole film** (whole-film integrated LUFS
-is diluted by silent holds; note this dilution makes beds placed against it
-QUIETER, not louder — measure speech-only for predictability, not as a
-loudness fix. An earlier version of this paragraph called the diluted anchor
-the root cause of loud music; the director sign-checked the arithmetic and
-that was backwards). What actually makes music drown dialogue, per Carl v2:
-(1) **no ducking** — a statically-placed bed at even a correct level reads
-as competing the moment a line starts; **sidechain-duck the whole bed bus
-under the dialogue track**
-(`sidechaincompress=threshold=0.02:ratio=8:attack=80:release=900`) — worth
-~8dB during overlaps and the single biggest fix; (2) static offsets too hot
-— music ~15dB under the speech anchor, ambience ~16, and the mixes that
-sounded right ran nearer 18-22 under during dialogue; (3) **integrated-LUFS
-normalization under-reads a cue's LOUD passages** — a quiet intro dilutes
-the average, so the normalized chorus plays several dB hotter than nominal,
-usually right under a line (same averaging-window bug as the crickets, one
-level up). Copy the `speech_anchor()` + ducked mix graph from
-`tools/templates/make_animatic.py` instead of re-deriving this. And since none of us here have ears, `listen.py` sends any audio to
-Gemini — but only ever ask it to FIND FAULTS or compare A vs B, never to rate
-quality. Prompted adversarially it catches whines, wrong-content beds, and
-"this sounds like tinnitus" that no meter shows; asked "is this good?" it
-calls everything flawless, including a voice that was literally inaudible.
-And even its fault reports pattern-complete: it found one real whine (spectrum-
-verified, +18 dB narrowband spike) then claimed the same whine in beds that
-measure clean. Treat its findings as leads — confirm with an FFT/ebur128
-measurement before mass-applying a fix. Audibility and level questions are
+The mixing rule that prevents every "the music is overpowering" round: **set
+all levels in LUFS, never in mean volume**. Spiky sounds like crickets read
+quiet on an amplitude meter but loud to the ear; ebur128 hears them the way
+you do. One guard on the normalizer: a bed that needs more than ~12dB of gain
+to reach target isn't quiet, it's a failed generation (ElevenLabs sometimes
+returns near-silence), and boosting it just amplifies the noise floor into a
+mechanical drone — regenerate or drop it. A `-inf` loudness measurement is
+that failure announcing itself.
+
+The mix itself is three steps. Normalize every stem to a common -30 LUFS.
+Measure the **speech anchor** — integrated LUFS of the concatenated dialogue
+lines alone, never of the whole film. (Whole-film LUFS is diluted by silent
+holds; that dilution actually places beds *quieter*, not louder — we once
+blamed it for loud music and had the sign backwards. Speech-only measurement
+buys predictability, not a level fix.) Then place music about 15dB under the
+anchor and ambience about 16, expecting the mixes that sound right to run
+nearer 18–22 under during dialogue.
+
+What actually makes music drown dialogue, in order of impact: (1) **no
+ducking** — the single biggest fix. A statically-placed bed at even a correct
+level reads as competing the moment a line starts; sidechain-duck the whole
+bed bus under the dialogue track
+(`sidechaincompress=threshold=0.02:ratio=8:attack=80:release=900`), worth
+~8dB during overlaps. (2) **Static offsets too hot** — hence the 18–22dB
+figure above. (3) **Integrated-LUFS normalization under-reads a cue's loud
+passages** — a quiet intro dilutes the average, so the normalized chorus
+plays several dB hotter than nominal, usually right under a line (the same
+averaging-window bug as the crickets, one level up). All of this is already
+implemented: copy `speech_anchor()` and the ducked mix graph from
+`tools/templates/make_animatic.py` rather than re-deriving it.
+
+And since none of us here have ears, `listen.py` sends any audio to Gemini —
+but only ever ask it to FIND FAULTS or compare A vs B, never to rate quality.
+Prompted adversarially it catches whines, wrong-content beds, and "this
+sounds like tinnitus" that no meter shows; asked "is this good?" it calls
+everything flawless, including a voice that was literally inaudible. Even its
+fault reports pattern-complete: it once found a real whine (spectrum-verified,
+a +18dB narrowband spike) and then claimed the same whine in beds that
+measure clean. Treat its findings as leads and confirm with an FFT/ebur128
+measurement before mass-applying a fix — audibility and level questions are
 measurements, not listening questions.
 
 ## Batches and money
