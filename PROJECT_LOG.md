@@ -14,6 +14,21 @@
 > (2026-07-18: film folders other than long_game/ moved under other_movies/ —
 > paths like carl/... now mean other_movies/carl/...)
 
+> Addendum (2026-07-19, "The Long Game" v19 retakes, ~/Code/videogen/long_game):
+> - **Fast mode fails on ANY --audio reference, not just multiple.** All 8
+>   fast+audio submissions (4 shots x 2 retries) ended server-side with a
+>   bare `failed` status and no error message; a fast+audio job from the
+>   previous day failed identically, while neighboring fast jobs WITHOUT
+>   audio completed. Same prompts resubmitted --std all completed first try.
+>   The failed fast jobs did NOT bill (balance unchanged across all 8; the
+>   4-clip std batch then cost exactly 132 cr).
+>   Credits were fine (the balance-check-first rule was followed and ruled
+>   out). Playbook rule updated: voice-ref shots are std-only.
+> - The generic `failed` status is distinguishable from a content flag: nsfw
+>   rejections show status `nsfw` in `generate list --json`; a capability
+>   mismatch shows `failed` with err None. Cross-tab `mode`/media roles/status
+>   from `generate list --json` to spot the pattern before burning retries.
+
 > Addendum (2026-07-19, director clarification — targeted image edits):
 > - Both real attempts at Nano Banana targeted edits were on Homo Sapien:
 >   (1) symmetrizing the animals on opposite sides of a road — didn't really

@@ -46,7 +46,11 @@ def run(job):
     dest = outdir / f"{name}.mp4"
     if dest.exists():
         return f"SKIP {name}"
-    mode = [] if "fast" in sys.argv[4:] else ["--std"]
+    fast = "fast" in sys.argv[4:]
+    # fast mode fails server-side on ANY --audio ref (see MOVIE_LESSONS.md);
+    # voice-ref shots are silently upgraded to std rather than submitted doomed
+    upgraded = fast and "--audio" in rest
+    mode = [] if fast and not upgraded else ["--std"]
     cmd = [str(TOOLS / "gen.py"), "video", prompt,
            "--resolution", "480p", *mode, "--duration", dur] + rest
     for attempt in (1, 2):
@@ -54,7 +58,7 @@ def run(job):
         out = r.stdout.strip().splitlines()
         if r.returncode == 0 and out and Path(out[-1]).exists():
             subprocess.run(["cp", out[-1], str(dest)])
-            return f"OK {name}"
+            return f"OK {name}" + (" (std: has audio ref)" if upgraded else "")
         (outdir / f"{name}.err").write_text(r.stdout + r.stderr)
     return f"FAIL {name}"
 

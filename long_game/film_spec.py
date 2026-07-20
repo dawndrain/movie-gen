@@ -1,10 +1,12 @@
 """The Long Game — film spec (data for tools/assemble.py).
-Reproduces the v18 cut (credits ending) exactly; see storyboard_v18.html."""
+v19 cut: n3 (remedy card) dropped, n1/n5 line retakes, tidy p4 room,
+new ending tail — q7 full + q7b consider + q8 knock — then credits.
+(v18 = credits ending, cut mid-attempt; see storyboard_v18.html.)"""
 from pathlib import Path
 
 ROOT = Path(__file__).parent
-OUT = "outputs/previews/preview_v18.mp4"
-GRAPH = "outputs/assemble_v18_graph.txt"
+OUT = "outputs/previews/preview_v19.mp4"
+GRAPH = "outputs/assemble_v19_graph.txt"
 SIZE = (854, 480)
 FPS = 24
 
@@ -56,15 +58,14 @@ CUT = [
     (ROOT / "outputs/video3/r11_dictate_blood.mp4", 0, None, False, None),
     (ROOT / "outputs/video7/r12_salt4.mp4", 0, None, False, None),
     (ROOT / "outputs/video7/r13_sweet3.mp4", 0, None, False, None),
-    (ROOT / "outputs/video4/n1_bridge.mp4", 0, None, False, 'ren_a'),
+    (ROOT / "outputs/video19/n1_bridge2.mp4", 0, None, False, 'ren_a'),
     (ROOT / "outputs/video4/n2_widow.mp4", 0, None, False, None),
-    (ROOT / "outputs/video4/n3_card.mp4", 0, None, False, None),
     (ROOT / "outputs/video3/e1_library2.mp4", 0, None, False, 'silence'),
     (ROOT / "outputs/video3/e2_fire.mp4", 0, 6.9, False, None),
     (ROOT / "outputs/video4/n4_fireflash.mp4", 0, None, False, None),
     (ROOT / "outputs/video3/e2_fire.mp4", 6.9, None, False, None),
     (ROOT / "outputs/video3/e3_flood.mp4", 0, None, False, None),
-    (ROOT / "outputs/video4/n5_type.mp4", 0, None, False, 'ren_b'),
+    (ROOT / "outputs/video19/n5_type2.mp4", 0, None, False, 'ren_b'),
     (ROOT / "outputs/video3/e4_montage.mp4", 0, None, False, None),
     (ROOT / "outputs/video4/n6_boiler.mp4", 0, None, False, 'boiler'),
     (ROOT / "outputs/video4/n7_again.mp4", 0, None, False, 'silence'),
@@ -80,14 +81,18 @@ CUT = [
     (ROOT / "outputs/video11/p1_dinner2.mp4", 0, None, False, 'warmtail'),
     (ROOT / "outputs/video14/p2_board4.mp4", 0, None, False, None),
     (ROOT / "outputs/video12/p3_fix.mp4", 0, None, False, 'machine'),
-    (ROOT / "outputs/video7/p4_exit3.mp4", 0, None, False, 'silence'),
+    (ROOT / "outputs/video19/p4_exit4.mp4", 0, None, False, 'silence'),
     (ROOT / "outputs/video5/q1_off2.mp4", 0, None, False, 'silence'),
     (ROOT / "outputs/video12/q2_fix.mp4", 0, None, False, None),
     (ROOT / "outputs/video16/q3_walk2.mp4", 0, None, False, None),
     (ROOT / "outputs/video6/q4_real2.mp4", 0, None, False, 'omen_q4'),
     (ROOT / "outputs/video4/q5_nested.mp4", 0, None, False, 'silence'),
     (ROOT / "outputs/video4/q6_longtime2.mp4", 0, None, False, None),
-    (ROOT / "outputs/video6/q7_fail2.mp4", 0, 7.5, False, 'silence'),
+    (ROOT / "outputs/video6/q7_fail2.mp4", 0, None, False, 'silence'),
+    # head-trimmed 2.0s: the take doubles "Maybe I'm home" (once mid-sit-up at
+    # 0-1.5s, again seated at 3.9s); the trim drops the first and cuts lying->seated
+    (ROOT / "outputs/video19/q7b_consider.mp4", 2.0, None, False, None),
+    (ROOT / "outputs/video7/q8_come3.mp4", 0, None, False, None),
     (ROOT / "outputs/credits.mp4", 0, None, False, 'silence'),
 ]
 
@@ -114,12 +119,12 @@ AMBIENCE = [
     ("a8_out3", "b1_wake5", "amb_arcade_n.m4a", "-12dB"),
     ("b1_wake5", "b21_party3", "amb_bronze_n.m4a", "-16dB"),
     ("r7_bath_pitch", "r8_glass2", "amb_baths_n.m4a", "-12dB"),
-    ("r8_glass2", "n1_bridge", "amb_workshop_n.m4a", "-16dB"),
-    ("n1_bridge", "e1_library2", "amb_ren_city_n.m4a", "-16dB"),
+    ("r8_glass2", "n1_bridge2", "amb_workshop_n.m4a", "-16dB"),
+    ("n1_bridge2", "e1_library2", "amb_ren_city_n.m4a", "-16dB"),
     ("m1_wake2", "p1_dinner2", "amb_1926_n.m4a", "-16dB"),
     ("q1_off2", "q3_walk2", "amb_arcade_n.m4a", "-12dB"),
 ]
 
-GRADE = {'q7_fail2': 'fade=t=out:st=6.7:d=0.8,'}
-AFADE = {'q7_fail2': (6.9, 0.6)}
+GRADE = {'q8_come3': 'fade=t=out:st=9.1:d=0.8,'}
+AFADE = {'q8_come3': (9.2, 0.7)}
 FREEZE = {}

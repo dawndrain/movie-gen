@@ -140,14 +140,11 @@ SHOTS = [
      'one?"  (Cass just smiles.)'),
     ("r13", "outputs/video7/r13_sweet3.mp4", "Pretty sweet",
      'CASS: "Things are going to be pretty sweet in the next life."'),
-    ("n1", "outputs/video4/n1_bridge.mp4", "Fifty, and a new rule",
-     'CASS: "Fifty years old. Ten till the gate. New rule: nobody dies this time."'),
+    ("n1", "outputs/video19/n1_bridge2.mp4", "Fifty, and a spotless record (v19 line retake)",
+     'CASS: "Fifty years old. Ten till the gate. And I have not died since the '
+     'BRONZE AGE. This should be easy."'),
     ("n2", "outputs/video4/n2_widow.mp4", "The widow clocks him in",
      'WIDOW: "Sixty, this time, child."  CASS: "Sixty. Got it. Thank you."'),
-    ("n3", "outputs/video4/n3_card.mp4", "The consolation prize",
-     'CARD: "For the flux — a jug of clean water, a measure of salt, a measure of '
-     'honey... old wisdom, source unknown."  CASS: "Those are MY measures. Tertius, '
-     'you beautiful idiot. You actually wrote it down."'),
     ("e1", f"{V3}/e1_library2.mp4", "The librarian points, again",
      'CASS: "Where is your section on the greatest writers of antiquity?"'),
     ("e2", f"{V3}/e2_fire.mp4", "The fire",
@@ -156,9 +153,9 @@ SHOTS = [
     ("n4", "outputs/video4/n4_fireflash.mp4", "The fire itself (flash cut, spliced into e2)", None),
     ("e3", f"{V3}/e3_flood.mp4", "The vow (plays dry; music enters at n5)",
      'CASS: "Alright then. I will FLOOD the world with knowledge."'),
-    ("n5", "outputs/video4/n5_type.mp4", "The tool that makes the tool",
-     'APPRENTICE: "A thousand little letters... why?"  CASS: "Because I am NEVER '
-     'copying anything by hand again."'),
+    ("n5", "outputs/video19/n5_type2.mp4", "The tool that makes the tool (v19 line retake)",
+     'APPRENTICE: "A thousand little letters... why?"  CASS: "Because last time, '
+     'everything I knew existed in ONE copy. In ONE building. Which caught ONE fire."'),
     ("e4", f"{V3}/e4_montage.mp4", "The flood", None),
     ("n6", "outputs/video4/n6_boiler.mp4", "I can HEAR the pressure",
      'APPRENTICE: "Master... shouldn\'t there be some kind of gauge?"  CASS: "I '
@@ -198,7 +195,7 @@ SHOTS = [
      'CASS: "Age gates... save-point logic... exit conditions... Tester overrides. '
      'There\'s a DOOR?! There was a DOOR the WHOLE TIME?!"  PETER (O.S.): "Uncle?"  '
      'CASS: "Marvelous craftsmanship, Peter."'),
-    ("p4", "outputs/video7/p4_exit3.mp4", "The staff door",
+    ("p4", "outputs/video19/p4_exit4.mp4", "The staff door (v19 retake: well-kept room)",
      'CASS: "Five lifetimes. Every chore, every gate... and I am leaving through the '
      'staff door."  (He performs the sequence. White.)'),
     ("q1", "outputs/video5/q1_off2.mp4", "Over four minutes",
@@ -216,12 +213,18 @@ SHOTS = [
      'INSIDE the game and got stuck a whole level DOWN!"'),
     ("q6", "outputs/video4/q6_longtime2.mp4", "Even funnier the second time",
      'MILO: "How — how was it?"  CASS: "I lived a long time."  (The arcade explodes.)'),
-    ("q7", "outputs/video6/q7_fail2.mp4", "The code (attempts two and three)", None),
-    ("q_credits", "outputs/credits.mp4", "THE ENDING: gentle fade to black -> amber CRT credits (hum + ominous arcade cue)", None),
-    ("q8", "outputs/video7/q8_come3.mp4", "Yeah. I'm coming. [door ending only]",
+    ("q7", "outputs/video6/q7_fail2.mp4",
+     "The code (attempts two and three) — now plays FULL: both fails + the ceiling stare", None),
+    ("q7b", "outputs/video19/q7b_consider.mp4",
+     "Considering attempt four (NEW in v19; chained from q7's last frame)",
+     'CASS: "Maybe I\'m home. ...Maybe I\'m five levels deep."  (He raises his hands '
+     'into the sequence — and holds.)'),
+    ("q8", "outputs/video7/q8_come3.mp4", "The knock answers it (back in the cut in v19)",
      'DESHAWN (through door): "Yo! We\'re going out. You coming, or you gonna sit in '
      'the dark being weird about the arcade thing all night?"  CASS: "Yeah. Yeah. '
      'I\'m coming."'),
+    ("q_credits", "outputs/credits.mp4",
+     "Fade to black -> amber CRT credits (hum + ominous arcade cue)", None),
 ]
 
 CHAPTERS = {"t": "I — The Arcade (2044)", "a": "I — The Arcade (2044)", "b": "II — Bronze (Day Zero and the reign)", "w": "II — Bronze (Day Zero and the reign)",
@@ -244,8 +247,12 @@ def load_prompts():
     """Parse gen calls from the two batch scripts: name -> (prompt, refs)."""
     import re
     prompts = {}
-    for script in ("videos_ch1-4.sh", "videos_v2.sh", "videos_v3.sh", "videos_v4.sh", "videos_v5.sh"):
-        text = (ROOT / script).read_text()
+    for script in ("videos_ch1-4.sh", "videos_v2.sh", "videos_v3.sh", "videos_v4.sh",
+                   "videos_v5.sh", "videos_v19.sh"):
+        path = ROOT / script
+        if not path.exists():
+            path = ROOT / "archive" / script  # older batches were archived
+        text = path.read_text()
         vars_ = dict(re.findall(r'^([A-Z]+)="(.*)"$', text, re.M))
         for m in re.finditer(r'^gen (\S+) (\d+) "(.*?)" (.*?)&?$', text, re.M):
             name, _, prompt, rest = m.groups()
@@ -350,7 +357,7 @@ details {{ margin-top:8px; }}
            border-radius:6px; margin:6px 0; }}
 .refs {{ color:#667; font-size:12px; }}
 </style>
-<h1>The Long Game — COMEDY CUT storyboard ({LABEL}) — two endings: preview_v12 (door) vs preview_v12_alt_ending (cuts mid-attempt)</h1>
+<h1>The Long Game — COMEDY CUT storyboard ({LABEL}) — v19 ending: attempts fail in full, he weighs one more, the knock answers it, credits</h1>
 <details class="score"><summary>The score — click to listen to each cue</summary>
 <div class="cue"><b>omen</b> (cold open, crescendo · the "next life" gut-punch · before the first code attempt)<br><audio controls preload="none" src="music/mus_omen.m4a"></audio></div>
 <div class="cue"><b>arcade ambience</b> (under the arcade scenes, very low)<br><audio controls preload="none" src="music/mus_arcade2.m4a"></audio></div>

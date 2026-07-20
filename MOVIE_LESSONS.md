@@ -54,7 +54,8 @@ including close-up faces, where the worst identity glitches were actually std
 takes; the earlier "fast is unusable" verdict traced back to bad prompting,
 not the mode). One roll per shot by default — per-take seed luck matters more
 than mode, so re-roll individual shots that fail QC rather than paying double
-up front. Std is still required for shots with multiple `--audio` references and
+up front. Std is still required for any shot with an `--audio` reference (fast+audio
+jobs fail server-side with a bare "failed" status — even a single ref) and
 for output above 720p. Either mode takes about three to five minutes per clip;
 if clips are taking half an hour, you're not slow, you're contended — another
 project is eating the workspace's eight-job cap.
@@ -283,7 +284,8 @@ safe). gen.py enforces the cap with a slot-file semaphore — set
 `SEEDANCE_SLOTS=4` if you're also submitting outside gen.py. Nano Banana and
 Sonilo aren't capped the same way (~5 concurrent images and 3 music jobs run
 clean). Run batches through pool_run.py — it skips shots whose output already
-exists, so re-running the same command is the retry pass. Name shots with
+exists, so re-running the same command is the retry pass, and in fast mode
+it auto-upgrades any `--audio` shot to std (fast+audio jobs always fail). Name shots with
 short act-prefixed slugs (`a3_reveal`, `b12_cough`) and land each pass in a
 versioned `outputs/videoN/` dir so reverts stay one-line edits. Generate the
 batch script from the same shot table the storyboard uses so the two can't
