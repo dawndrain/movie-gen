@@ -14,6 +14,17 @@
 > (2026-07-18: film folders other than long_game/ moved under other_movies/ —
 > paths like carl/... now mean other_movies/carl/...)
 
+> Addendum (2026-07-19, director clarification — targeted image edits):
+> - Both real attempts at Nano Banana targeted edits were on Homo Sapien:
+>   (1) symmetrizing the animals on opposite sides of a road — didn't really
+>   work; (2) replacing a child's hand with a woman's — tripped Nano Banana's
+>   csam filter (the ref image contained the child's hand; no wording could
+>   pass it). Weak evidence overall that targeted image edits are very
+>   useful; the "targeted edits beat re-rolls" law is withdrawn from the
+>   README. (The 07-12 Carl bullet crediting a successful torch→lighter
+>   targeted edit doesn't match the director's accounting — treat it as
+>   unreproduced.)
+
 > Addendum (2026-07-18, "Dungeon Crawler Carl" audio QC — promoted from the
 > old header notes):
 > - Gemini audio QC is SYCOPHANTIC as a rater — scored every audition voice

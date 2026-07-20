@@ -9,10 +9,12 @@ comedy, ~80 shots, 18 iteration passes), lives in `long_game/` as the worked
 example.
 
 A taste of the output: [The Long Game's cast, voices, and start frames](docs/long_game/index.html) (open locally, or via Pages once public) — and [the finished film](https://www.youtube.com/watch?v=q40M08SOhGs).
+Two more finished films: [Homo Sapien](https://www.youtube.com/watch?v=QlP-dhZTQUE) (the music video) and [Walter's Deal](https://www.youtube.com/watch?v=pHtF_ApUjRo).
+There's also a blog post about the whole endeavor: [Making AI Movies](https://dawndrain.notion.site/Making-AI-Movies-39cbb81dad798077b43adcd96e3ebe75).
 
 **Start with [MOVIE_LESSONS.md](MOVIE_LESSONS.md)** — the playbook:
 the pipeline, the laws (retakes regress; after two failed rewordings change
-what happens; targeted edits beat re-rolls), prompting, voices, sound, and
+what happens; the problem dictates the fix), prompting, voices, sound, and
 costs. The dated per-project postmortems behind those rules live in
 [PROJECT_LOG.md](PROJECT_LOG.md).
 
