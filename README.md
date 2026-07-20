@@ -10,11 +10,11 @@ example.
 
 A taste of the output: [The Long Game's cast, voices, and start frames](docs/long_game/index.html) (open locally, or via Pages once public) — and [the finished film](https://www.youtube.com/watch?v=q40M08SOhGs).
 
-**Start with [MOVIE_LESSONS.md](MOVIE_LESSONS.md)** — the distilled playbook:
+**Start with [MOVIE_LESSONS.md](MOVIE_LESSONS.md)** — the playbook:
 the pipeline, the laws (retakes regress; after two failed rewordings change
 what happens; targeted edits beat re-rolls), prompting, voices, sound, and
-costs. The unabridged version with per-project war stories is
-[MOVIE_LESSONS_FULL.md](MOVIE_LESSONS_FULL.md).
+costs. The dated per-project postmortems behind those rules live in
+[PROJECT_LOG.md](PROJECT_LOG.md).
 
 ## The pipeline in one breath
 

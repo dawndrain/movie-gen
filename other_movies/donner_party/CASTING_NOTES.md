@@ -8,4 +8,4 @@ Verdicts on the current audition round:
 
 Directive: re-audition using PROMPTED custom voices (ElevenLabs voice design),
 not catalog/community voices — the catalog is where the pirate came from.
-See MOVIE_LESSONS_FULL.md "Voice casting / auditions".
+See MOVIE_LESSONS.md "Voices, dubbing, and QC".
