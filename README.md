@@ -5,7 +5,7 @@ consistent characters and voices) with Seedance 2.0 (video), Nano Banana Pro
 (images), Sonilo (music) — all three via Higgsfield's CLI — plus ElevenLabs
 (voices), Gemini (audio/image QC), and a lot of ffmpeg. About ten films have
 been made this way; the first complete one, **The Long Game** (an 11-minute
-comedy, ~80 shots, 18 iteration passes), lives in `long_game/` as the worked
+comedy, ~80 shots, ~15 iteration passes), lives in `long_game/` as the worked
 example.
 
 A taste of the output: [The Long Game's cast, voices, and start frames](docs/long_game/index.html) (open locally, or via Pages once public) — and [the finished film](https://www.youtube.com/watch?v=q40M08SOhGs).

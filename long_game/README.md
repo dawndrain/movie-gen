@@ -4,7 +4,9 @@ An ~11-minute AI-generated comedy — the first complete film made with this
 pipeline, and the repo's worked example. A teenager gets cocky at a mysterious
 arcade machine ("THE LONG GAME — one credit, one life"), picks maximum
 difficulty, and has to live an entire life — bronze age to 1926 — to get back
-to the exit. It took 18 iteration passes over about a week.
+to the exit. It took about 15 iteration passes over about a week — the film
+was broadly in shape by v12, the YouTube upload is roughly v15, and the
+archive holds 18 rounds counting the experiments past the uploaded cut.
 
 **Watch it:** https://www.youtube.com/watch?v=q40M08SOhGs
 
