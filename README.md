@@ -50,21 +50,18 @@ veo3_compare/     the std-vs-fast blind test harness + prompts
 
 ## Quickstart for a new film
 
-Prerequisites: Python 3.10+, `ffmpeg`/`ffprobe` on PATH, Node 18+ for the
-Higgsfield CLI (`npm i -g @higgsfield/cli` — the only path to Seedance 2.0 /
-Nano Banana Pro), and `pip install numpy` (pitch_check). Optional per tool:
-`edge-tts` (free draft TTS), `demucs` + Whisper (dub QC).
+This repo is built to be driven by Claude Code, not by hand. Your part:
 
-1. `npm i -g @higgsfield/cli`, then `higgsfield auth login` &&
-   `higgsfield workspace set <id>`; put API keys at `~/.elevenlabs_key` and
-   `~/.gemini_key` (`~/.fal_key` only if using fal.ai as an alternate
-   Seedance provider).
-2. Make a folder, write the treatment, then follow the pipeline order in
-   MOVIE_LESSONS.md — anchors, frames, voices, **animatic first**.
-3. Copy what you need from `tools/templates/` and adapt its spec imports.
-4. Generate clips via a batch script + `python3 ../tools/pool_run.py
-   videos_v1.sh outputs/video1 7`, assemble with `python3 ../tools/assemble.py
-   film_spec.py`, review via the storyboard, iterate.
+1. **Accounts.** A [Higgsfield](https://higgsfield.ai) account with credits
+   (Seedance 2.0 and Nano Banana Pro run through their CLI) and an
+   [ElevenLabs](https://elevenlabs.io) account for voices. Optional: a Gemini
+   API key for automated audio/image QC.
+2. **Run Claude Code** in the repo root. It reads the playbook
+   (MOVIE_LESSONS.md) and asks what kind of movie you want to make.
+3. **Answer, and stay in the director's chair.** Claude installs the tooling,
+   scaffolds the project, and drives the pipeline; the only steps it hands
+   back to you are the browser logins (`higgsfield auth login`) and pasting
+   your API keys. From there your job is notes on the animatic and previews.
 
 Media (clips, frames, audio, previews) is deliberately not in git — only
 specs, scripts, and docs. Everything under `outputs/` is regenerable from

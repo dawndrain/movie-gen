@@ -354,10 +354,34 @@ Higgsfield: fal.ai and BytePlus ModelArk sell it by API key (~$0.30/s std) —
 pricier per clip, but no OAuth, no workspace, no expiring credits.
 
 API keys live at `~/.elevenlabs_key` and `~/.gemini_key` (plus `~/.fal_key`
-if using fal.ai as an alternate Seedance provider). `gen.py` (video/image
-generation) sits at the repo root; the other shared tools (pool_run,
-dub_clip, pitch_check, listen) live in `tools/`, with best-of-breed per-film
-tools to copy in `tools/templates/`; each film is its own subfolder. The repo
+if using fal.ai as an alternate Seedance provider). Local prerequisites
+beyond the CLI: Python 3.10+, `ffmpeg`/`ffprobe` on PATH, and
+`pip install numpy` (pitch_check). Optional per tool: `edge-tts` (free draft
+TTS for animatics), `demucs` + Whisper (dub QC).
+
+**Starting from zero with a new director.** The human's share of setup is
+accounts: a Higgsfield account with credits, an ElevenLabs account for
+voices, optionally a Gemini API key for QC. Everything else — installs,
+project scaffolding, the whole pipeline — is yours to drive. Check what
+already works (`higgsfield auth status`, the key files above) and walk them
+through only what's missing; the browser OAuth login and pasting API keys
+are the only steps they must do themselves. Then ask what kind of movie they
+want to make — length, genre, tone, any story seed they have — and start the
+pipeline in the order in "How a film gets made."
+
+**Starting a new film.** Each film is its own subfolder. Write the treatment
+first, then follow the pipeline order — anchors, frames, voices, **animatic
+first**, and only then clips. Copy what you need from `tools/templates/`
+(animatic, auditions, ambience, images, storyboard, batch emitter, frame
+edits, upscale, dub pass) and adapt its spec imports. Generate clips via a
+batch script run through
+`python3 ../tools/pool_run.py videos_v1.sh outputs/video1 7` (it skips
+finished shots, so re-run = retry), assemble with
+`python3 ../tools/assemble.py film_spec.py`, review via the generated
+storyboard page, iterate.
+
+`gen.py` (video/image generation) sits at the repo root; the other shared
+tools (pool_run, dub_clip, pitch_check, listen) live in `tools/`. The repo
 (github.com/dawndrain/movie-gen) excludes media and any project adapting a
 copyrighted source — add such projects to .gitignore BEFORE committing. The
 war stories and measurements behind everything above are in PROJECT_LOG.md.
